@@ -29,11 +29,15 @@ const Home = () => {
 
     useEffect(() => { readUser(); }, []);
 
-    const filteredData = data.filter(val => 
-        val.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        val.phone.includes(searchTerm)
-    );
+const filteredData = data.filter((val) => {
+    const fullName = `${val.firstName} ${val.lastName}`.toLowerCase();
+    const phone = String(val.phone || "");
 
+    return (
+        fullName.includes(searchTerm.toLowerCase()) ||
+        phone.includes(searchTerm)
+    );
+});
     return (
         <div className="container py-5">
             <div className="header-banner shadow">
